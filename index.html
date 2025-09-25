@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Health Check - Camping Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5530;
+            --secondary: #6b8e23;
+            --accent: #f5a623;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 85, 48, 0.85), rgba(44, 85, 48, 0.9)), 
+                        url('https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            padding: 12px 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e69510;
+            border-color: #e69510;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .benefit-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .quiz-step {
+            display: none;
+        }
+        
+        .quiz-step.active {
+            display: block;
+        }
+        
+        .progress {
+            height: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-check-label {
+            margin-left: 10px;
+        }
+        
+        .result-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .score-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .score-bar {
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            width: 70%;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .rice-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-wifi me-2"></i>Camping Connect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Case Studies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-lg-3" href="#quiz">Start Health Check</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1>Does Your Park's WiFi Drive 5-Star Reviews or Cost You Repeat Bookings?</h1>
+                    <p class="lead">Get Your Free WiFi Health Score in 2 Minutes</p>
+                    <p>Discover how your WiFi impacts your revenue and reputation using our R.I.C.E. framework</p>
+                    <a href="#quiz" class="btn btn-primary btn-lg mt-3">Start Your Free Health Check</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">How The WiFi Health Check Works</h2>
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="benefit-card p-4">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h4>1. Complete Quick Quiz</h4>
+                        <p>Answer a few simple questions about your park and current WiFi setup.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="benefit-card p-4">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>2. Get Your WiFi Score</h4>
+                        <p>Receive an immediate WiFi Health Score based on our R.I.C.E. framework analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="benefit-card p-4">
+                        <div class="benefit-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>3. Receive Custom Report</h4>
+                        <p>Get a detailed PDF report with actionable insights for your park.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RICE Framework Benefits -->
+    <section id="benefits" class="py-5">
+        <div class="container">
+            <h2 class="section-title">How Better WiFi Impacts Your Business</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="benefit-card p-4 h-100">
+                        <h4><span class="rice-badge">Reward</span> Increase Repeat Bookings & Revenue</h4>
+                        <p>Guests who can stream, work, and stay connected are 3x more likely to rebook. Premium WiFi allows you to command higher rates for pitches and accommodations.</p>
+                        <ul>
+                            <li>Attract longer-stay "workation" guests</li>
+                            <li>Increase booking value with premium WiFi packages</li>
+                            <li>Boost ancillary revenue from happy, connected guests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="benefit-card p-4 h-100">
+                        <h4><span class="rice-badge">Ideology</span> Deliver a 5-Star Guest Experience</h4>
+                        <p>In today's connected world, reliable WiFi is no longer a luxury - it's an essential part of the modern holiday experience that guests expect.</p>
+                        <ul>
+                            <li>Meet and exceed guest expectations</li>
+                            <li>Provide seamless connectivity from booking to departure</li>
+                            <li>Become known for outstanding amenities</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="benefit-card p-4 h-100">
+                        <h4><span class="rice-badge">Coercion</span> Protect Against Negative Reviews</h4>
+                        <p>Poor WiFi is the #1 complaint in otherwise positive reviews. Don't let connectivity issues undermine your hard-earned reputation.</p>
+                        <ul>
+                            <li>Eliminate WiFi-related complaints</li>
+                            <li>Stop losing guests to competitors with better connectivity</li>
+                            <li>Prevent negative reviews from costing you future bookings</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="benefit-card p-4 h-100">
+                        <h4><span class="rice-badge">Ego</span> Become the Industry Leader</h4>
+                        <p>Parks with superior WiFi stand out from the competition and become the go-to choice for discerning guests.</p>
+                        <ul>
+                            <li>Differentiate your park in a competitive market</li>
+                            <li>Gain recognition as a forward-thinking business</li>
+                            <li>Build a reputation that attracts premium guests</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="quiz-container">
+                        <h2 class="text-center mb-4">Your WiFi Health Check</h2>
+                        <p class="text-center mb-4">Answer a few questions to get your personalized WiFi Health Score and recommendations</p>
+                        
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        
+                        <form id="wifiQuizForm" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="84e57385-3355-4946-8dce-2a7972448a15">
+                            <input type="hidden" name="subject" value="New WiFi Health Check Submission">
+                            <input type="hidden" name="from_name" value="Camping Connect WiFi Health Check">
+                            
+                            <!-- Step 1: Park Profile -->
+                            <div class="quiz-step active" id="step1">
+                                <h3 class="quiz-question">Park Profile</h3>
+                                
+                                <div class="mb-3">
+                                    <label for="parkName" class="form-label">Park Name</label>
+                                    <input type="text" class="form-control" id="parkName" name="parkName" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="contactName" name="contactName" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="pitches" class="form-label">Number of Pitches/Accommodations</label>
+                                    <select class="form-select" id="pitches" name="pitches" required>
+                                        <option value="" selected disabled>Select range</option>
+                                        <option value="1-50">1-50</option>
+                                        <option value="51-100">51-100</option>
+                                        <option value="101-200">101-200</option>
+                                        <option value="200+">200+</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">Primary Type of Accommodation</label>
+                                    <div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accommodationType" value="Touring Caravans" id="type1">
+                                            <label class="form-check-label" for="type1">Touring Caravans</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accommodationType" value="Tents" id="type2">
+                                            <label class="form-check-label" for="type2">Tents</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accommodationType" value="Static Caravans" id="type3">
+                                            <label class="form-check-label" for="type3">Static Caravans</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accommodationType" value="Lodges" id="type4">
+                                            <label class="form-check-label" for="type4">Lodges</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accommodationType" value="Mix" id="type5">
+                                            <label class="form-check-label" for="type5">Mix</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary next-step" data-step="1">Next</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Current WiFi & Pain Points -->
+                            <div class="quiz-step" id="step2">
+                                <h3 class="quiz-question">Current WiFi Setup</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">Is guest WiFi available consistently across the entire park?</label>
+                                    <div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiCoverage" value="Yes, Everywhere" id="coverage1" required>
+                                            <label class="form-check-label" for="coverage1">Yes, Everywhere</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiCoverage" value="Only in certain areas" id="coverage2">
+                                            <label class="form-check-label" for="coverage2">Only in certain areas (e.g., bar, reception)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiCoverage" value="We don't offer guest WiFi" id="coverage3">
+                                            <label class="form-check-label" for="coverage3">We don't offer guest WiFi</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">How often do you receive comments or reviews about your WiFi?</label>
+                                    <div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiFeedback" value="Frequently" id="feedback1" required>
+                                            <label class="form-check-label" for="feedback1">Frequently</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiFeedback" value="Occasionally" id="feedback2">
+                                            <label class="form-check-label" for="feedback2">Occasionally</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiFeedback" value="Rarely" id="feedback3">
+                                            <label class="form-check-label" for="feedback3">Rarely</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="wifiFeedback" value="Never" id="feedback4">
+                                            <label class="form-check-label" for="feedback4">Never</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="wifiImportance" class="form-label">On a scale of 1-10, how important is excellent WiFi to your target guests?</label>
+                                    <input type="range" class="form-range" min="1" max="10" id="wifiImportance" name="wifiImportance">
+                                    <div class="d-flex justify-content-between">
+                                        <span>1 - Not Important</span>
+                                        <span id="importanceValue">5</span>
+                                        <span>10 - Essential</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-step="2">Back</button>
+                                    <button type="button" class="btn btn-primary next-step" data-step="2">Next</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3: Opportunity & Ego -->
+                            <div class="quiz-step" id="step3">
+                                <h3 class="quiz-question">Business Goals</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">What would be the biggest benefit of improving your WiFi?</label>
+                                    <div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="benefits" value="Increase repeat bookings" id="benefit1">
+                                            <label class="form-check-label" for="benefit1">Increase repeat bookings</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="benefits" value="Get better online reviews" id="benefit2">
+                                            <label class="form-check-label" for="benefit2">Get better online reviews</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="benefits" value="Attract longer-stay workation guests" id="benefit3">
+                                            <label class="form-check-label" for="benefit3">Attract longer-stay "workation" guests</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="benefits" value="Charge premium for pitches" id="benefit4">
+                                            <label class="form-check-label" for="benefit4">Charge a premium for pitches</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="benefits" value="Keep up with competitors" id="benefit5">
+                                            <label class="form-check-label" for="benefit5">Keep up with competitor parks</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="decisionMaker" class="form-label">Who is the best person to discuss a potential upgrade?</label>
+                                    <input type="text" class="form-control" id="decisionMaker" name="decisionMaker">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="timeline" class="form-label">What is your timeline for considering WiFi improvements?</label>
+                                    <select class="form-select" id="timeline" name="timeline">
+                                        <option value="" selected disabled>Select timeline</option>
+                                        <option value="Immediately">Immediately</option>
+                                        <option value="1-3 months">1-3 months</option>
+                                        <option value="3-6 months">3-6 months</option>
+                                        <option value="6-12 months">6-12 months</option>
+                                        <option value="No plans">No plans currently</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-step="3">Back</button>
+                                    <button type="button" class="btn btn-primary next-step" data-step="3">See My Results</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Results Step -->
+                            <div class="quiz-step" id="step4">
+                                <div class="result-section">
+                                    <h3>Your WiFi Health Score</h3>
+                                    <div class="score-display">7/10</div>
+                                    <p>Based on your answers, here's how your WiFi stacks up:</p>
+                                    
+                                    <div class="score-bar">
+                                        <div class="score-fill"></div>
+                                    </div>
+                                    
+                                    <div id="dynamicResults">
+                                        <!-- Dynamic content based on answers will go here -->
+                                        <p>Our analysis shows there's significant opportunity to improve guest satisfaction and increase revenue through WiFi enhancements.</p>
+                                        <p>Based on your park size and goals, we recommend a consultation to explore solutions tailored to your specific needs.</p>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary">Get My Detailed PDF Report</button>
+                                        <p class="small mt-2">By submitting, you agree to be contacted about your results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Parks We've Helped Succeed</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Since upgrading our WiFi with Camping Connect, we've seen a 25% increase in repeat bookings. Guests specifically mention our excellent connectivity in their reviews."
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-secondary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-0">Sarah Johnson</h5>
+                                <p class="mb-0">Owner, Lakeside Holiday Park</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The R.I.C.E. framework opened our eyes to how WiFi was impacting our business. We're now attracting more 'workation' guests who stay longer and spend more."
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-secondary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-0">Michael Thompson</h5>
+                                <p class="mb-0">Manager, Forest Glade Camping</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "WiFi complaints used to be our #1 issue. Now we have zero negative comments about connectivity and our overall rating has improved from 4.2 to 4.7 stars."
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-user-circle fa-2x text-secondary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-0">Emma Davies</h5>
+                                <p class="mb-0">Director, Coastal Retreat Park</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4><i class="fas fa-wifi me-2"></i>Camping Connect</h4>
+                    <p>Helping holiday parks maximize revenue and guest satisfaction through reliable, park-wide WiFi solutions.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-phone me-2"></i> 0800 123 4567</p>
+                    <p><i class="fas fa-envelope me-2"></i> hello@campingconnect.co.uk</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#how-it-works" class="text-light">How It Works</a></li>
+                        <li><a href="#benefits" class="text-light">Benefits</a></li>
+                        <li><a href="#testimonials" class="text-light">Case Studies</a></li>
+                        <li><a href="#quiz" class="text-light">Health Check</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2023 Camping Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz navigation
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+            const progressBar = document.querySelector('.progress-bar');
+            const importanceSlider = document.getElementById('wifiImportance');
+            const importanceValue = document.getElementById('importanceValue');
+            
+            // Update importance value display
+            if (importanceSlider && importanceValue) {
+                importanceValue.textContent = importanceSlider.value;
+                importanceSlider.addEventListener('input', function() {
+                    importanceValue.textContent = this.value;
+                });
+            }
+            
+            // Next button functionality
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = this.getAttribute('data-step');
+                    const nextStep = parseInt(currentStep) + 1;
+                    
+                    // Validate current step before proceeding
+                    if (validateStep(currentStep)) {
+                        document.getElementById('step' + currentStep).classList.remove('active');
+                        document.getElementById('step' + nextStep).classList.add('active');
+                        
+                        // Update progress bar
+                        progressBar.style.width = (nextStep * 25) + '%';
+                    }
+                });
+            });
+            
+            // Previous button functionality
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = this.getAttribute('data-step');
+                    const prevStep = parseInt(currentStep) - 1;
+                    
+                    document.getElementById('step' + currentStep).classList.remove('active');
+                    document.getElementById('step' + prevStep).classList.add('active');
+                    
+                    // Update progress bar
+                    progressBar.style.width = (prevStep * 25) + '%';
+                });
+            });
+            
+            // Simple step validation
+            function validateStep(step) {
+                const currentStepElement = document.getElementById('step' + step);
+                const requiredFields = currentStepElement.querySelectorAll('[required]');
+                
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+                
+                // For radio buttons
+                const radioGroups = currentStepElement.querySelectorAll('input[type="radio"]');
+                radioGroups.forEach(group => {
+                    const name = group.getAttribute('name');
+                    const radiosInGroup = currentStepElement.querySelectorAll(`input[name="${name}"]`);
+                    const isChecked = Array.from(radiosInGroup).some(radio => radio.checked);
+                    
+                    if (!isChecked && group.hasAttribute('required')) {
+                        isValid = false;
+                        radiosInGroup[0].closest('.form-check').classList.add('text-danger');
+                    } else {
+                        radiosInGroup[0].closest('.form-check').classList.remove('text-danger');
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Form submission
+            const form = document.getElementById('wifiQuizForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Here you would typically send the form data to your server
+                    // For now, we'll just show a success message
+                    alert('Thank you! Your WiFi Health Check results and detailed report will be emailed to you shortly. A Camping Connect representative will contact you to discuss your results.');
+                    
+                    // In a real implementation, you would submit the form to Web3Forms
+                    // this.submit();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
